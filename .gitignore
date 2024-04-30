@@ -1,4 +1,5 @@
 proxmox-api-go
+proxmox-api-go.exe
 .vagrant/
 .vscode
 .env
