@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Telmate/proxmox-api-go/internal/util"
+	"github.com/mollstam/proxmox-api-go/internal/util"
 )
 
 // Currently ZFS local, LVM, Ceph RBD, CephFS, Directory and virtio-scsi-pci are considered.

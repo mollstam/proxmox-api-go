@@ -3,11 +3,11 @@ package cli_storage_test
 import (
 	"testing"
 
-	_ "github.com/Telmate/proxmox-api-go/cli/command/commands"
-	"github.com/Telmate/proxmox-api-go/internal/util"
-	"github.com/Telmate/proxmox-api-go/proxmox"
-	cliTest "github.com/Telmate/proxmox-api-go/test/cli"
-	storagesubtests "github.com/Telmate/proxmox-api-go/test/cli/Storage/storage-sub-tests"
+	_ "github.com/mollstam/proxmox-api-go/cli/command/commands"
+	"github.com/mollstam/proxmox-api-go/internal/util"
+	"github.com/mollstam/proxmox-api-go/proxmox"
+	cliTest "github.com/mollstam/proxmox-api-go/test/cli"
+	storagesubtests "github.com/mollstam/proxmox-api-go/test/cli/Storage/storage-sub-tests"
 )
 
 func Test_Storage_SMB_0_Cleanup(t *testing.T) {

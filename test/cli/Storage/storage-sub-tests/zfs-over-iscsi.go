@@ -1,8 +1,8 @@
 package storagesubtests
 
 import (
-	"github.com/Telmate/proxmox-api-go/internal/util"
-	"github.com/Telmate/proxmox-api-go/proxmox"
+	"github.com/mollstam/proxmox-api-go/internal/util"
+	"github.com/mollstam/proxmox-api-go/proxmox"
 )
 
 var ZFSoverISCSIFull = proxmox.ConfigStorage{

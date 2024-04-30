@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	_ "github.com/Telmate/proxmox-api-go/cli/command/commands"
-	"github.com/Telmate/proxmox-api-go/proxmox"
-	cliTest "github.com/Telmate/proxmox-api-go/test/cli"
+	_ "github.com/mollstam/proxmox-api-go/cli/command/commands"
+	"github.com/mollstam/proxmox-api-go/proxmox"
+	cliTest "github.com/mollstam/proxmox-api-go/test/cli"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

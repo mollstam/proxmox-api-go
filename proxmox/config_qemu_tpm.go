@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/Telmate/proxmox-api-go/internal/util"
+	"github.com/mollstam/proxmox-api-go/internal/util"
 )
 
 type TpmState struct {
