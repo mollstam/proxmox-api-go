@@ -937,11 +937,8 @@ type qemuStorage struct {
 }
 
 func (storage *qemuStorage) mapToApiValues(currentStorage *qemuStorage, vmID, linkedVmId uint, id QemuDiskId, params map[string]interface{}, delete string) string {
-	if storage == nil {
-		return delete
-	}
 	// CDROM
-	if storage.CdRom != nil {
+	if storage != nil && storage.CdRom != nil {
 		if currentStorage == nil || currentStorage.CdRom == nil {
 			// Create
 			params[string(id)] = storage.CdRom.mapToApiValues()
@@ -953,12 +950,12 @@ func (storage *qemuStorage) mapToApiValues(currentStorage *qemuStorage, vmID, li
 			}
 		}
 		return delete
-	} else if currentStorage != nil && currentStorage.CdRom != nil && storage.CloudInit == nil && storage.Disk == nil && storage.Passthrough == nil {
+	} else if currentStorage != nil && currentStorage.CdRom != nil && (storage == nil || (storage.CloudInit == nil && storage.Disk == nil && storage.Passthrough == nil)) {
 		// Delete
 		return AddToList(delete, string(id))
 	}
 	// CloudInit
-	if storage.CloudInit != nil {
+	if storage != nil && storage.CloudInit != nil {
 		if currentStorage == nil || currentStorage.CloudInit == nil {
 			// Create
 			params[string(id)] = storage.CloudInit.mapToApiValues()
@@ -970,12 +967,12 @@ func (storage *qemuStorage) mapToApiValues(currentStorage *qemuStorage, vmID, li
 			}
 		}
 		return delete
-	} else if currentStorage != nil && currentStorage.CloudInit != nil && storage.Disk == nil && storage.Passthrough == nil {
+	} else if currentStorage != nil && currentStorage.CloudInit != nil && (storage == nil || (storage.Disk == nil && storage.Passthrough == nil)) {
 		// Delete
 		return AddToList(delete, string(id))
 	}
 	// Disk
-	if storage.Disk != nil {
+	if storage != nil && storage.Disk != nil {
 		if currentStorage == nil || currentStorage.Disk == nil {
 			// Create
 			params[string(id)] = storage.Disk.mapToApiValues(vmID, 0, "", "", false, true)
@@ -995,12 +992,12 @@ func (storage *qemuStorage) mapToApiValues(currentStorage *qemuStorage, vmID, li
 			}
 		}
 		return delete
-	} else if currentStorage != nil && currentStorage.Disk != nil && storage.Passthrough == nil {
+	} else if currentStorage != nil && currentStorage.Disk != nil && (storage == nil || storage.Passthrough == nil) {
 		// Delete
 		return AddToList(delete, string(id))
 	}
 	// Passthrough
-	if storage.Passthrough != nil {
+	if storage != nil && storage.Passthrough != nil {
 		if currentStorage == nil || currentStorage.Passthrough == nil {
 			// Create
 			params[string(id)] = storage.Passthrough.mapToApiValues(0, 0, "", "", false, false)
