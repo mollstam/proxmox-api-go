@@ -11,15 +11,15 @@ import (
 // LXC options for the Proxmox API
 type ConfigLxc struct {
 	Ostemplate         string      `json:"ostemplate"`
-	Arch               string      `json:"arch"`
+	Arch               string      `json:"arch,omitempty"`
 	BWLimit            int         `json:"bwlimit,omitempty"`
 	Clone              string      `json:"clone,omitempty"`
 	CloneStorage       string      `json:"clone-storage,omitempty"`
-	CMode              string      `json:"cmode"`
-	Console            bool        `json:"console"`
+	CMode              string      `json:"cmode,omitempty"`
+	Console            bool        `json:"console,omitempty"`
 	Cores              int         `json:"cores,omitempty"`
-	CPULimit           int         `json:"cpulimit"`
-	CPUUnits           int         `json:"cpuunits"`
+	CPULimit           int         `json:"cpulimit,omitempty"`
+	CPUUnits           int         `json:"cpuunits,omitempty"`
 	Description        string      `json:"description,omitempty"`
 	Features           QemuDevice  `json:"features,omitempty"`
 	Force              bool        `json:"force,omitempty"`
@@ -30,29 +30,29 @@ type ConfigLxc struct {
 	Hostname           string      `json:"hostname,omitempty"`
 	IgnoreUnpackErrors bool        `json:"ignore-unpack-errors,omitempty"`
 	Lock               string      `json:"lock,omitempty"`
-	Memory             int         `json:"memory"`
+	Memory             int         `json:"memory,omitempty"`
 	Mountpoints        QemuDevices `json:"mountpoints,omitempty"`
 	Nameserver         string      `json:"nameserver,omitempty"`
 	Networks           QemuDevices `json:"networks,omitempty"`
-	OnBoot             bool        `json:"onboot"`
+	OnBoot             bool        `json:"onboot,omitempty"`
 	OsType             string      `json:"ostype,omitempty"`
 	Password           string      `json:"password,omitempty"`
 	Pool               string      `json:"pool,omitempty"`
-	Protection         bool        `json:"protection"`
+	Protection         bool        `json:"protection,omitempty"`
 	Restore            bool        `json:"restore,omitempty"`
 	RootFs             QemuDevice  `json:"rootfs,omitempty"`
 	SearchDomain       string      `json:"searchdomain,omitempty"`
 	Snapname           string      `json:"snapname,omitempty"`
 	SSHPublicKeys      string      `json:"ssh-public-keys,omitempty"`
-	Start              bool        `json:"start"`
+	Start              bool        `json:"start,omitempty"`
 	Startup            string      `json:"startup,omitempty"`
-	Storage            string      `json:"storage"`
-	Swap               int         `json:"swap"`
+	Storage            string      `json:"storage,omitempty"`
+	Swap               int         `json:"swap,omitempty"`
 	Template           bool        `json:"template,omitempty"`
-	Tty                int         `json:"tty"`
+	Tty                int         `json:"tty,omitempty"`
 	Unique             bool        `json:"unique,omitempty"`
-	Unprivileged       bool        `json:"unprivileged"`
-	Tags               string      `json:"tags"`
+	Unprivileged       bool        `json:"unprivileged,omitempty"`
+	Tags               string      `json:"tags,omitempty"`
 	Unused             []string    `json:"unused,omitempty"`
 }
 
