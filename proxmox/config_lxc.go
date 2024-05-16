@@ -420,7 +420,9 @@ func (config ConfigLxc) UpdateConfig(vmr *VmRef, client *Client) (err error) {
 		return err
 	}
 
-	_, err = client.SetLxcConfig(vmr, paramMap)
+	if len(paramMap) > 0 {
+		_, err = client.SetLxcConfig(vmr, paramMap)
+	}
 	return err
 }
 
