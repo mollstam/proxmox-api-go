@@ -1119,6 +1119,29 @@ func (c *Client) CreateVNCProxy(vmr *VmRef, params map[string]interface{}) (vncP
 	return
 }
 
+// CreateTermProxy - Creates a TCP VNC proxy connections
+func (c *Client) CreateTermProxy(vmr *VmRef, params map[string]interface{}) (termProxyRes map[string]interface{}, err error) {
+	err = c.CheckVmRef(vmr)
+	if err != nil {
+		return nil, err
+	}
+	reqbody := ParamsToBody(params)
+	url := fmt.Sprintf("/nodes/%s/%s/%d/termproxy", vmr.node, vmr.vmType, vmr.vmId)
+	resp, err := c.session.Post(url, nil, nil, &reqbody)
+	if err != nil {
+		return nil, err
+	}
+	termProxyRes, err = ResponseJSON(resp)
+	if err != nil {
+		return nil, err
+	}
+	if termProxyRes["data"] == nil {
+		return nil, fmt.Errorf("TermProxy not readable")
+	}
+	termProxyRes = termProxyRes["data"].(map[string]interface{})
+	return
+}
+
 // QemuAgentPing - Execute ping.
 func (c *Client) QemuAgentPing(vmr *VmRef) (pingRes map[string]interface{}, err error) {
 	err = c.CheckVmRef(vmr)
