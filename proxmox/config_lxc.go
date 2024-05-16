@@ -456,7 +456,9 @@ func (config ConfigLxc) mapToApiValues() map[string]interface{} {
 	// add features as parameter list to lxc parameters
 	// this overwrites the original formatting with a
 	// comma separated list of "key=value" pairs
-	paramMap["features"] = formatDeviceParam(config.Features)
+	if features := config.Features; features != nil {
+		paramMap["features"] = formatDeviceParam(features)
+	}
 
 	// format rootfs params as expected
 	if rootfs := config.RootFs; rootfs != nil {
