@@ -2133,6 +2133,17 @@ func (c *Client) GetItemConfig(url, text, message string) (config map[string]int
 	return
 }
 
+func (c *Client) Header() (header http.Header) {
+	header = http.Header(make(map[string][]string))
+	if c.session.AuthToken != "" {
+		header["Authorization"] = []string{"PVEAPIToken=" + c.session.AuthToken}
+	} else if c.session.AuthTicket != "" {
+		header["Authorization"] = []string{"PVEAuthCookie=" + c.session.AuthTicket}
+		header["CSRFPreventionToken"] = []string{c.session.CsrfToken}
+	}
+	return
+}
+
 // Makes a POST request without waiting on proxmox for the task to complete.
 // It returns the HTTP error as 'err'.
 func (c *Client) Post(Params map[string]interface{}, url string) (err error) {
