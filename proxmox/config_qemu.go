@@ -23,8 +23,8 @@ import (
 const machineModels = `(pc|q35|pc-i440fx)`
 
 type (
-	QemuDevices     map[int]map[string]interface{}
 	QemuDevice      map[string]interface{}
+	QemuDevices     map[int]QemuDevice
 	QemuDeviceParam []string
 	IpconfigMap     map[int]interface{}
 )
