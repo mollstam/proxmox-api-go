@@ -189,7 +189,7 @@ func (config *ConfigSDNZone) CreateWithValidate(id string, client *Client) (err 
 
 func (config *ConfigSDNZone) Create(id string, client *Client) (err error) {
 	config.Zone = id
-	params := config.mapToApiValues()
+	params := config.mapToApiValues(true)
 	return client.CreateSDNZone(params)
 }
 
@@ -203,7 +203,7 @@ func (config *ConfigSDNZone) UpdateWithValidate(id string, client *Client) (err 
 
 func (config *ConfigSDNZone) Update(id string, client *Client) (err error) {
 	config.Zone = id
-	params := config.mapToApiValues()
+	params := config.mapToApiValues(false)
 	err = client.UpdateSDNZone(id, params)
 	if err != nil {
 		params, _ := json.Marshal(&params)
@@ -224,9 +224,11 @@ func (c *ConfigSDNZone) Validate(id string, create bool, client *Client) (err er
 		return ErrorItemNotExists(id, "zone")
 	}
 
-	err = ValidateStringInArray([]string{"evpn", "qinq", "simple", "vlan", "vxlan"}, c.Type, "type")
-	if err != nil {
-		return
+	if create {
+		err = ValidateStringInArray([]string{"evpn", "qinq", "simple", "vlan", "vxlan"}, c.Type, "type")
+		if err != nil {
+			return
+		}
 	}
 	switch c.Type {
 	case "simple":
@@ -273,7 +275,7 @@ func (c *ConfigSDNZone) Validate(id string, create bool, client *Client) (err er
 	return
 }
 
-func (config *ConfigSDNZone) mapToApiValues() (params map[string]interface{}) {
+func (config *ConfigSDNZone) mapToApiValues(create bool) (params map[string]interface{}) {
 
 	d, _ := json.Marshal(config)
 	json.Unmarshal(d, &params)
@@ -289,8 +291,8 @@ func (config *ConfigSDNZone) mapToApiValues() (params map[string]interface{}) {
 			params[key] = Btoi(v.(bool))
 		}
 	}
-	// Remove the zone and type (path parameters) from the map
-	delete(params, "zone")
-	delete(params, "type")
+	if !create {
+		delete(params, "type")
+	}
 	return
 }
