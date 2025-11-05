@@ -405,6 +405,7 @@ func (config ConfigLxc) UpdateConfig(vmr *VmRef, client *Client) (err error) {
 	delete(paramMap, "pool")
 	delete(paramMap, "storage")
 	delete(paramMap, "password")
+	delete(paramMap, "ssh-public-keys")
 	delete(paramMap, "ostemplate")
 	delete(paramMap, "start")
 	delete(paramMap, "clone")
